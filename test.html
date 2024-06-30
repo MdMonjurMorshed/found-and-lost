@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{asset('css/home.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .chatbox-container {
+    margin: 20px 0px 0px 30px;
+    height: 80vh;
+    width: 77vw;
+    background:#ececec ;
+    overflow-y: scroll;
+    /* padding: 20px; */
+}
+.chat-box-header{
+    height: 10%;
+    width: 100%;
+    background:#742846 ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    
+
+}
+.receiver-info{
+  
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  height: 100%;
+  width: auto;
+  margin-left: 20px;
+  float: left;
+
+}
+.verify-btn-container{
+  flex: .2;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  height: 100%;
+  width: auto;
+  float:right;
+
+}
+.user-photo{
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  height: 80%;
+  width:auto;
+  margin-left: 20px;
+  float: left;
+}
+.profile-image{
+  border: 2px solid white;
+  border-radius: 50%;
+}
+.user-name{
+  margin-left: 5px;
+  color: white;
+}
+.verify-btn-container{
+  position: relative;
+  display: initial;
+  align-items: center;
+  justify-content: center;
+}
+.verify-menu{
+    position: absolute;
+    background-color: white;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+    
+    align-items: center;
+}
+.verify-menu li{
+  text-align: center;
+}
+ul li:hover{
+  background: #742846;
+  cursor: pointer;
+  color: white;
+}
+.verify-btn{
+  
+  margin-left: 20%;
+  margin-top: 6%;
+  background: #742846;
+  color: white;
+}
+.hide{
+  display: none;
+}
+.message-topic{
+  
+  width: 70%;
+  padding: 15px;
+  border-radius: 50px;
+  border: none;
+  background-color: white;
+  
+  margin-top: 2%;
+  margin-left: 10%;
+
+}
+.topic-image{
+  border-radius: 50%;
+}
+.text-box{
+    margin-left: 2.5%;
+    height:5vh;
+    width: 70vw;
+    border: 2px solid #742846;
+    border-color: #742846;
+}
+.send-btn{
+  height: 6vh;
+  width: 5%;
+  background:#742846;
+  color: white;
+    
+}
+
+
+    </style>
+</head>
+<body>
+
+  <div class="chatbox-container">
+    <div class="chat-box-header">
+       
+        <div class="receiver-info">
+          <div class="user-photo">
+            <img class="profile-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s" height="20px" width="auto" alt="">
+          </div>
+          <div class="user-name">
+               tahi
+          </div>
+        </div>
+        <div class="verify-btn-container">
+          
+
+                <button onclick="button_click()"
+                class="verify-btn">verify</button>
+                <ul class=" verify-menu hide" id="verify-option" aria-labelledby="dropdownMenuButton1">
+                    <li><span class="dropdown-item" >Yes</span></li>
+                    <li><span class="dropdown-item" >No</span></li>
+                   
+                </ul>
+            
+
+        </div>
+        
+       
+      
+
+    </div>
+
+
+    <div class="message-topic">
+      <img class="topic-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s" height="50px" width="auto" alt="">
+    </div>
+
+    <div class="db-message">
+      
+    </div>
+
+
+  </div>
+  <form action="" id="message-form">
+    <input class="text-box" id="submited-message" type="text">
+    <button class="send-btn">send</button>
+  </form>
+  
+
+    
+<script>
+ function button_click(){
+  document.getElementById('verify-option').classList.toggle('hide')
+ }
+</script>
+<script>
+  var input_value= document.getElementById('size')
+  var submit_button = document.getElementById('sub-btn')
+
+  var val='tahi'
+  var div_item = document.getElementById('divid')
+  submit_button.addEventListener('click', ()=>{
+    val+=input_value.value
+   for (var i=0; i< parseInt(input_value.value);i++){
+    div_item.innerHTML += `<input type="text" id="input-${i}"> <input type="text" id="input-0${i}"> <br>`
+
+   }
+   div_item.innerHTML += `<button id="save-item">save</button>` 
+   var save_btn = document.getElementById('save-item')
+   save_btn.addEventListener('click',()=>{
+    console.log(input_value.value)
+    var sum1 = 0
+    var sum2 = 0
+    for (var i=0; i< parseInt(input_value.value);i++){
+        sum1 += parseInt(document.getElementById(`input-${i}`).value)
+        sum2 += parseInt(document.getElementById(`input-0${i}`).value)
+
+     
+
+   }
+   console.log(parseFloat (sum1/sum2))
+   div_item.innerHTML += `<input value="${parseFloat (sum1/sum2)}"><br>`
+   div_item.innerHTML += `<button id="re-btn" >refresh</button><br>`
+   
+   
+   document.getElementById('re-btn').addEventListener('click',()=>{
+    window.location.reload()
+  })
+
+  })
+
+  })
+ 
+  console.log(val)
+
+  if (document.getElementById('save-item')){
+    console.log('it exists')
+
+    
+  }
+
+  
+  
+
+
+
+ 
+</script>
+    
+</body>
+</html>
