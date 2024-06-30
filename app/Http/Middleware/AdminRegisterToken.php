@@ -19,7 +19,7 @@ class AdminRegisterToken
         $admin_code=env('ADMIN_CODE');
         if ($code != $admin_code)
         {
-            return redirect()->back()->with('error','Code did not matched');
+            return redirect()->back()->with('error','Admin code did not matched');
         }
 
         // dd($code);

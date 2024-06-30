@@ -32,7 +32,7 @@ class UserLoginController extends Controller
            
             return redirect(route('user.mainpage'));
         }
-        return redirect()->back()->withError(['email'=>'user cradential is invalid']);
+        return redirect()->back()->with('error','user cradential is invalid');
     } 
 
     public function logout(Request $request)

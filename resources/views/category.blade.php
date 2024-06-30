@@ -5,20 +5,16 @@
 </span>
                         <div id="subcategory-list" class="subcategory-list ms-4 hide">
                         @foreach($categories as $category)
-                            <form id="subcat" action="" method="GET">
+                            <form id="subcat-{{$category->id}}" action="" method="GET">
                                     
 
-                                    <button class="logout-btn" id="cat-search" type="submit" >{{$category->name}} </button>
+                                    <button class="logout-btn" id="cat-search-{{$category->id}}" type="submit" >{{$category->name}} </button>
                                     @if(Auth::guard('admin')->check())
                                     
                                       
                                             <i class="fa fa-trash" type="button" id="category-{{$category->id}}" aria-hidden="true" style="color:red"></i>
-                                       
-                                    
-                                    @endif
-                                    
-                            </form>
-                            <script>
+                                            
+                                            <script>
                                 document.getElementById('category-{{$category->id}}').addEventListener('click',(e)=>{
                                     e.preventDefault();
                                         let id='category-{{$category->id}}'
@@ -30,19 +26,29 @@
                                     
                                 })
 
-                                document.getElementById('dynamicLink').addEventListener('click',(e)=>{
-                                    document.getElementById('subcategory-list').classListToggle('hide')
-                                })
+                               
                             </script>
+                                    
+                                    @endif
+                                    
+                            </form>
+                            
+                            @if(Auth::guard('web')->check())
                             <script>
-                                 document.getElementById('subcat').addEventListener('submit',(e)=>{
-                                        e.preventDefault()
+                                 document.getElementById('subcat-{{$category->id}}').addEventListener('submit',(e)=>{
+                                     e.preventDefault()   
                                      var currentUrl = window.location.href;
-                                     let category = document.getElementById('cat-search').textContent
-                                     axios.get("{{route('user.get.catsearch',['cat_name'=>$category->name])}}").then(response=>{
+                                     let category = document.getElementById('cat-search-{{$category->id}}').textContent
+                                    
+                                     console.log(category)
+                                     axios_url="{{route('user.get.catsearch',':cat_name')}}".replace(':cat_name',category)
+                                     axios.get(axios_url).then(response=>{
                                          var founditems = response.data.founditems
                                          var lostitems = response.data.lostitems
                                          var returnitems = response.data.returnitems
+                                         console.log(founditems)
+                                         console.log(lostitems)
+                                         console.log(returnitems)
                                          if (currentUrl.includes('/user/dashboard')) {
                                             console.log('in dashboaed')
                                            document.getElementById('found-grid').innerHTML=''
@@ -154,18 +160,27 @@
                                          })
                                     
                             </script>
+                        @endif    
 
                         @if(Auth::guard('admin')->check())
 
                         <script>
-                                 document.getElementById('subcat').addEventListener('submit',(e)=>{
-                                        e.preventDefault()
+                                 document.getElementById('subcat-{{$category->id}}').addEventListener('submit',(e)=>{
+                                      
+                                    e.preventDefault() 
+
                                      var currentUrl = window.location.href;
-                                     let category = document.getElementById('cat-search').textContent
-                                     axios.get("{{route('admin.get.catsearch',['cat_name'=>$category->name])}}").then(response=>{
+                                     let category = document.getElementById('cat-search-{{$category->id}}').textContent
+                                     console.log(category) 
+                                     console.log(currentUrl)
+                                     axios_url="{{route('admin.get.catsearch',':cat_name')}}".replace(':cat_name',category)
+                                     axios.get(axios_url).then(response=>{
                                          var founditems = response.data.founditems
                                          var lostitems = response.data.lostitems
                                          var returnitems = response.data.returnitems
+                                         console.log(founditems)
+                                         console.log(lostitems)
+                                         console.log(returnitems)
                                          if (currentUrl.includes('/admin/dashboard')) {
                                             console.log('in dashboaed')
                                            document.getElementById('found-grid').innerHTML=''
@@ -209,6 +224,7 @@
                         
                         
                         if (currentUrl.includes("/admin/found-items")){
+
                             document.getElementById('found-grid').innerHTML=''
                             founditems.forEach(found=>{
                                 href_url_found="{{route('admin.found.details',':id')}}".replace(':id',found.id)
@@ -279,27 +295,15 @@
                                     
                             </script>
                              
-                        @endif    
+                        @endif 
+                               
                         @endforeach
+
+                       
                         </div>
 </li>
 
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var currentUrl = window.location.href; // Get the current URL from the address bar
-            var linkElement = document.getElementById('subcat'); // Get the <a> tag by its ID
 
-            // Optionally, add query parameters if needed
-            var queryParams = new URLSearchParams(window.location.search);
-            queryParams.set('category', '');
-
-            // Set the href attribute of the <a> tag
-            linkElement.action = currentUrl.split('?')[0] + '?' + queryParams.toString();
-        });
-        
-       
-
-    </script>
 @if(Auth::guard('admin')->check())
  
 <li class="category-item list-item" id="category-item" onClick="selectItem(this)">

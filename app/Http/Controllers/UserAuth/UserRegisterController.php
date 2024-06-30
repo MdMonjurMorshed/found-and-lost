@@ -21,6 +21,33 @@ class UserRegisterController extends Controller
         if ($user){
             return redirect()->back()->with('error','email already exist');
         }
+        if (!$request->name | !$request->email | !$request->password | !$request->confirm_password){
+            $message = [];
+
+            if (!$request->name){
+                $message[]="name";
+            }
+            if(!$request->email){
+                $message[]="email";
+            }
+            if(!$request->password){
+                $message[]="password";
+            }
+            if(!$request->confirm_password){
+                $message[]="confirm_password";
+            }
+            $error_message = "";
+            $fields = implode(',',$message);
+            if (count($message)>1){
+
+                $error_message = sprintf(" Fields %s are required to fill",$fields);
+            }
+            if(count($message)==1){
+                $error_message = sprintf("Field %s is required to fill",$fields);
+            }
+
+            return redirect()->back()->with('error',$error_message);
+        }
         if ($pass != $con_pass)
         {
             return redirect()->back()->with('error','password did not match');

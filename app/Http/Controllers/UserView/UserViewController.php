@@ -103,16 +103,47 @@ class UserViewController extends Controller
     public function post_found_item(Request $request)
     {
         
-        // $request->validate([
-        //     'image'=>'required|mimes:jpg,jpeg,png,gif|max:2048'
-        // ]);
+        $message =[];
+       
+        if(!$request->title){
+            $message[]="title";
+        }
+        if(!$request->date){
+            $message[]="found_date";
+        }
+        if(!$request->location){
+           $message[]="location";
+        }
+        if(!$request->description){
+            $message[]="description";
+        }
+        if(!$request->has('image')){
+            $message[]="image";
+        }
+        if(!$request->category){
+            $message[]="category";
+        }
+
+        if($message){
+            $fields = implode(',',$message);
+            $error_message = sprintf("Fields %s are required to fill",$fields);
+            if (count($message)==1){
+                $error_message = sprintf("Field %s is required to fill",$fields);
+            }
+            return redirect()->back()->with('error',$error_message);
+        }
+
         if ($request->has('image')){
             $file = $request->file('image');
             $image_name = time().'.'.$file->extension();
             $file->move(public_path('images/found-items/'),$image_name);
             
+            
+            
         }
-        ;
+
+        
+        
         
 
         try{
@@ -139,6 +170,35 @@ class UserViewController extends Controller
 
     public function lost_item_add(Request $request)
     {
+        $message =[];
+       
+        if(!$request->title){
+            $message[]="title";
+        }
+        if(!$request->date){
+            $message[]="lost_date";
+        }
+        if(!$request->location){
+           $message[]="location";
+        }
+        if(!$request->description){
+            $message[]="description";
+        }
+        if(!$request->has('image')){
+            $message[]="image";
+        }
+        if(!$request->category){
+            $message[]="category";
+        }
+
+        if($message){
+            $fields = implode(',',$message);
+            $error_message = sprintf("Fields %s are required to fill",$fields);
+            if (count($message)==1){
+                $error_message = sprintf("Field %s is required to fill",$fields);
+            }
+            return redirect()->back()->with('error',$error_message);
+        }
         if ($request->has('image')){
 
             $file = $request->file('image');
