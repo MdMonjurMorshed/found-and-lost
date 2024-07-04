@@ -18,8 +18,8 @@ Route::prefix('user')->group(function(){
     Route::get('dashboard', function () {
         if (Auth::guard('web')->check())
         {
-            $founditems = FoundItems::all();
-            $lostitems = LostItems::all();
+            $founditems = FoundItems::where('return',false)->get();
+            $lostitems = LostItems::where('return',false)->get();
             $categories = Category::all();
             
             return view('user.dashboard',['categories'=>$categories,'founditems'=>$founditems,'lostitems'=>$lostitems]);

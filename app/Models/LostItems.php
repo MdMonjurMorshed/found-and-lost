@@ -17,7 +17,8 @@ class LostItems extends Model
         'description',
         'image',
         'location',
-        'category'
+        'category',
+        'return'
  ];
     public function user()
     {

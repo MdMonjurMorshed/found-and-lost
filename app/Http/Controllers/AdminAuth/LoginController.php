@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         }
 
-        return redirect()->back()->with('error','invalid cradential');
+        return redirect()->back()->with('error','Invalid user credential');
     }
     public function logout(Request $request)
     {

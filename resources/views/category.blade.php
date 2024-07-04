@@ -8,7 +8,7 @@
                             <form id="subcat-{{$category->id}}" class="cat-holder" action="" method="GET">
                                     
 
-                                    <button class="logout-btn" id="cat-search-{{$category->id}}" type="submit" >{{$category->name}} </button>
+                                    <button class="sub-cat-btn" id="cat-search-{{$category->id}}" type="submit" >{{$category->name}} </button>
                                     @if(Auth::guard('admin')->check())
                                     
                                       

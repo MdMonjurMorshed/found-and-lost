@@ -25,7 +25,8 @@
         <div class="top-nav">
             <nav class="text-white top-navbar-menu">
                 <a href="{{route('admin.mainpage')}}"><img class="company-logo" src="{{asset('img/company-logo-navbar.png')}}" alt=""></a>
-                <div class="relative ml-3"> 
+                <div class="relative ml-3 user-logo-name">
+                    <div class="user-name">{{Auth::guard('admin')->user()->name}}</div> 
                     <div>
                         <button
                                 type="button"
@@ -49,7 +50,7 @@
 
                     <div
                         id="profile-dropdown"
-                        class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hide"
+                        class=" hide"
                         role="menu"
                         aria-orientation="vertical"
                         aria-labelledby="user-menu-button"

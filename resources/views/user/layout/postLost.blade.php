@@ -19,7 +19,7 @@
                             <label class="required-field">image</label>
                             <div>
                                     <input type="file" id="input-field" class="input-field" name="image" >
-                                    <input type="text" name="custom file" id="found-file-field" class="found-file-field" placeholder="choose file"  readonly>
+                                    <input type="text" name="custom file" id="found-file-field" class="found-file-field" placeholder="Choose file"  readonly>
                                     <ul id="file-list" class="file-list"></ul>
                             </div>
 

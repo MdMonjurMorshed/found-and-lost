@@ -8,6 +8,25 @@ use App\Models\User;
 
 class UserRegisterController extends Controller
 {
+    private function checkPasswordStrength($password)
+    {
+        if (strlen($password) < 8) {
+            return 'Password must be at least 8 characters.';
+        }
+        if (!preg_match('/[A-Z]/', $password)) {
+            return 'Password must include at least one uppercase letter.';
+        }
+        if (!preg_match('/[a-z]/', $password)) {
+            return 'Password must include at least one lowercase letter.';
+        }
+        if (!preg_match('/\d/', $password)) {
+            return 'Password must include at least one digit.';
+        }
+        if (!preg_match('/[@$!%*?&]/', $password)) {
+            return 'Password must include at least one special character.';
+        }
+        return true;
+    }
 
     public function showRegisterForm()
     {
@@ -51,6 +70,11 @@ class UserRegisterController extends Controller
         if ($pass != $con_pass)
         {
             return redirect()->back()->with('error','password did not match');
+        }
+        $pass_check = $this->checkPasswordStrength($request->password);
+        
+        if ($pass_check !== true){
+            return redirect()->back()->with('error',$pass_check);
         }
         
         User::create([

@@ -40,7 +40,7 @@
                     <input type="email" email="email" name="email" class="input-feild" id="email"
                         aria-describedby="emailHelp">
                 </div>
-                <div> 
+                <div class="mb-4"> 
                     <label for="password" class="ms-3">Password</label>
                     <input type="password" name="password" class="input-feild" id="password"
                         aria-describedby="passswordHelp">

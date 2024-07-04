@@ -7,7 +7,7 @@
      @foreach($lostitems as $lostitem)
         <div class="manage-item-container" id="lost-{{$lostitem->id}}">
             <div class="manage-info">
-                <img class="" src="{{asset($lostitem->image)}}" height="80px" width="100px" alt="">
+                <img class="topic-image" src="{{asset($lostitem->image)}}"  alt="">
                 <div class="manage-title" >
                     {{$lostitem->title}}
                 </div>

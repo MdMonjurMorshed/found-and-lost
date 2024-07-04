@@ -19,7 +19,7 @@
                             <label class="required-field">image</label>
                             <div>
                                     <input type="file" id="input-field" class="input-field" name="image" >
-                                    <input type="text" name="custom file" id="found-file-field" class="found-file-field" placeholder="choose file"  readonly>
+                                    <input type="text" name="custom file" id="found-file-field" class="found-file-field" placeholder="Choose file"  readonly>
                                     <ul id="file-list" class="file-list"></ul>
                             </div>
 
@@ -30,25 +30,25 @@
                         <div class="user-info mt-4">
                             
                             <div class="row user-input-info">
-                                <input type="text" class="input-feild " name="title" id="name" value="" placeholder="enter title" aria-describedby="textHelp">
+                                <input type="text" class="input-feild " name="title" id="name" value="" placeholder="Title.." aria-describedby="textHelp">
                                
                             </div>
                             <div class="row user-input-info">
-                                <input type="text" class="input-feild" name="date" id="name" value="" placeholder="found date(yyyy-mm-dd)" aria-describedby="textHelp">
+                                <input type="text" class="input-feild" name="date" id="name" value="" placeholder="Found date(yyyy-mm-dd).." aria-describedby="textHelp">
                             </div>
                             <div class="row user-input-info">
-                                <input type="text" class="input-feild" name="location" id="name" value="" placeholder="location" aria-describedby="textHelp">
+                                <input type="text" class="input-feild" name="location" id="name" value="" placeholder=" Found location.." aria-describedby="textHelp">
                             </div>
                             
                             <div class="row user-input-info">
-                                <textarea  rows="6" name="description" placeholder="enter description" cols="20" class="user-about" ></textarea>
+                                <textarea  rows="6" name="description" placeholder="Details.." cols="20" class="user-about" ></textarea>
                             </div>
                             
                             <div class=" category-holder ">
                                 <label for="category" class="required-field">category</label>
                                 <div>
                                     <select name="category" id="category-select">
-                                        <option value="">category</option>
+                                        <option value="">Category</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->name}}">{{$category->name}}</option>
                                         @endforeach

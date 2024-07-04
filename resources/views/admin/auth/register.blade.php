@@ -23,7 +23,7 @@
         @endif
     </script>
 
-    <div class="login-page">
+    <div class="admin-login-page">
         <div style="width: 400px; margin: auto; background-color: white; padding: 20px;">
             <div class="text-dark text-center">
                 <img class="company-logo" src="{{asset('img/company-logo.png')}}" alt="">
@@ -48,7 +48,7 @@
                         aria-describedby="textHelp">
                 </div>
                 
-                <div>
+                <div class="mb-4">
                     <label for="password" class="ms-3">Password</label>
                     <input type="password" name="password" class="input-feild" id="password"
                         aria-describedby="passswordHelp">

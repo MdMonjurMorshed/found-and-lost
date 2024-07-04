@@ -7,6 +7,11 @@
     height: 100vh;
     padding: 50px 0px;
 }
+.admin-login-page{
+    background-color: #742846;
+    height: 100%;
+    padding: 50px 0px;
+}
 
 .input-feild{
     display: block;

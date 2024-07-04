@@ -16,7 +16,7 @@
     <div class="row d-flex justify-content-center">
    
         <div class="col-9">
-        <h4 class="" style=" padding:0px 0px 10px 0px;color: black;font-size:20px; display:flex;justify-content:center">Returned {{$item_count}} {{$item_count > 1? 'items' : 'item'}} to the rightfull owner</h4>
+        <h4 class="" style=" padding:0px 0px 10px 0px;color: black;font-size:20px; display:flex;justify-content:center">Returned {{$item_count}} {{$item_count > 1? 'items' : 'item'}} to the rightful owner</h4>
         <div class="row g-4" id="return-grid">
 
             @foreach($return_items as $return_item)

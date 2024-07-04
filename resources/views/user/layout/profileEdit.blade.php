@@ -21,7 +21,7 @@
                             <label class="required-field">image</label>
                             <div>
                                     <input type="file" id="input-field" class="input-field" name="image" >
-                                    <input type="text" name="custom file" id="found-file-field" class="found-file-field" placeholder="choose file"  readonly>
+                                    <input type="text" name="custom file" id="found-file-field" class="found-file-field" placeholder="Choose file"  readonly>
                                     <ul id="file-list" class="file-list"></ul>
                             </div>
 
@@ -32,18 +32,18 @@
                         <div class="user-info mt-4">
                             
                             <div class="row user-input-info">
-                                <input type="text" class="input-feild " name="name" value="{{$user->name}}" id="name" placeholder="enter name"  aria-describedby="textHelp">
+                                <input type="text" class="input-feild " name="name" value="{{$user->name}}" id="name" placeholder="Enter name.."  aria-describedby="textHelp">
                                
                             </div>
                             <div class="row user-input-info">
-                                <input type="text" class="input-feild" name="email" value="{{$user->email}}" id="name" placeholder="enter email"  aria-describedby="textHelp">
+                                <input type="text" class="input-feild" name="email" value="{{$user->email}}" id="name" placeholder="Enter email.."  aria-describedby="textHelp">
                             </div>
                             <div class="row user-input-info">
-                                <input type="text" class="input-feild" name="phone_numner" value="{{$user->phone_number}}" id="name"  placeholder="enter phone number" aria-describedby="textHelp">
+                                <input type="text" class="input-feild" name="phone_numner" value="{{$user->phone_number}}" id="name"  placeholder="Enter phone number.." aria-describedby="textHelp">
                             </div>
                             
                             <div class="row user-input-info">
-                                <textarea  rows="6" name="about" placeholder="write someting about yourself"   cols="20" class="user-about" >{{$user->about}}</textarea>
+                                <textarea  rows="6" name="about" placeholder="Write about yourself.."   cols="20" class="user-about" >{{$user->about}}</textarea>
                             </div>
 
                         </div>

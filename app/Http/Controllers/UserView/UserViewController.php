@@ -233,6 +233,8 @@ class UserViewController extends Controller
     }
 
 
+// FOUND ITEM DETAILS
+
     public function found_item_details($id)
     {
         $founditem = FoundItems::find($id);
@@ -355,11 +357,16 @@ class UserViewController extends Controller
         return redirect()->back();
     }
 
+
+    // RETURN FOUND ITEM
+
     public function return_claimed_item(FoundItems $founditem){
        
        $claim = Claim::where('found_item_id',$founditem->id)->where('status',true)->first();
        $user_return_to = $claim->user;
        $user_return_by = $founditem->user;
+       $founditem->return = true;
+       $founditem->save();
        $return = ReturnItems::where('claim_id',$claim->id)->first();
        if ($return){
         return redirect()->back()->with('error',"You have already returned this item");
@@ -387,6 +394,9 @@ class UserViewController extends Controller
         
        
            }
+
+
+    //REPORT ITEM
 
     public function report_item(Request $request, LostItems $lostitem)
            {
@@ -432,10 +442,15 @@ class UserViewController extends Controller
         return redirect()->back();
     } 
     
+
+    // LOST ITEM RETURN
+
     public function lost_item_returned(LostItems $lostitem){
         $report = Report::where('lost_item_id',$lostitem->id)->where('status',true)->first();
         $user_return_by = $report->user;
         $user_return_to = $lostitem->user;
+        $lostitem->return = true ;
+        $lostitem->save();
         $return = ReturnItems::where('report_id',$report->id)->first();
         if ($return){
             return redirect()->back()->with('error'," You have already got this item back");
@@ -464,6 +479,8 @@ class UserViewController extends Controller
 
     }
 
+    //DELETE MY LISTING
+
     public function delete_mylisting($id){
         $founditem = FoundItems::find($id);
         $lostitem = LostItems::find($id);
@@ -477,6 +494,8 @@ class UserViewController extends Controller
         }
     }
 
+    // SEARCH BY CATEGORY
+
     public function cat_search($cat_name){
         $founditems = FoundItems::where('category',$cat_name)->get(); 
         $lostitems = LostItems::where('category',$cat_name)->get();
@@ -485,6 +504,9 @@ class UserViewController extends Controller
         return ['founditems'=>$founditems,'lostitems'=>$lostitems,'returnitems'=>$returnitems];
 
     }   
+
+
+    // SEARCH BY SEARCH BOX
     
     public function box_search(Request $request){
         $value = $request->input('search');
