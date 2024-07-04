@@ -444,7 +444,7 @@ body {
 }
 
 .chatbox-container {
-  margin: 20px 0px 0px 30px;
+  margin: 20px 0px 0px 60px;
   height: 80vh;
   width: 77vw;
   background:#ececec ;
@@ -575,7 +575,7 @@ color: white;
   width: 77vw;
 }
 .chatbox-user-container{
-  margin: 20px 0px 0px 30px;
+  margin: 20px 0px 0px 60px;
   height: 80vh;
   width: 77vw;
   background:#ececec ;
