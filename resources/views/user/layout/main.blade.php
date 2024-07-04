@@ -18,6 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/laravel-echo/dist/echo.iife.js"></script>  
 
     <!-- <link
       rel="stylesheet"
@@ -51,6 +53,7 @@
             <a href="{{route('user.mainpage')}}"><img class="company-logo" src="{{asset('img/company-logo-navbar.png')}}" alt=""></a>
 
                 <div class="relative ml-3"> 
+                    
                     <div>
                         <button
                                 type="button"
@@ -61,6 +64,7 @@
                                 id="profile-btn"
                                 onclick="on_click()"
                                 >
+                                <div class=" red-dot hide " id="red-dot"></div>
                                 <span class="absolute -inset-1.5"></span>
                                 <span class="sr-only">Open user menu</span>
                                 <img
@@ -90,11 +94,11 @@
                         >
                         <a
                         href="{{route('user.chatboxuser')}}"
-                        class="block px-4 py-2 text-sm text-gray-700"
+                        class="d-flex px-4 py-2 text-sm text-gray-700 chat-list"
                         role="menuitem"
                         tabindex="-1"
                         id="user-menu-item-1"
-                        >Chat Box</a
+                        >Chat Box <div class=" red-dot-chat hide" id="red-dot-chatlist"></div></a
                         >
                         @if (Auth::check())
                         <a
@@ -150,7 +154,7 @@
 
                         <form id="logout-form" action="{{ route('user.logout') }}" method="POST">
                             @csrf
-                             <button class="logout-btn" type="submit" onclick="logout()">logout</button>
+                             <button class="logout-btn" type="submit" onclick="logout()">Logout</button>
 
                         </form>
                     </li>
@@ -324,8 +328,75 @@
 
             })
         </script>
-        
 
+<script>
+  
+  Pusher.logToConsole = true;
+
+  const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+      cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+      wsHost: window.location.hostname,
+      wsPort: 6001,
+      wssPort: 6001,
+      forceTLS: false,
+      enabledTransports: ['ws', 'wss']
+  });
+
+  const echo = new Echo({
+      broadcaster: 'pusher',
+      key: '{{ env('PUSHER_APP_KEY') }}',
+      cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+      wsHost: window.location.hostname,
+      wsPort: 6001,
+      wssPort: 6001,
+      forceTLS: false,
+      disableStats: true,
+      enabledTransports: ['ws', 'wss']
+  });
+  
+  echo.private("message-notify.{{Auth::guard('web')->user()->id}}").listen(
+    'MessageNotification',function(e){
+        console.log(e.message_id)
+        console.log(e.message)
+        console.log(e.sender)
+        if(e.message){
+           
+
+        }
+    }
+  )
+
+  
+</script>
+        
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        axios.get("{{route('user.get.readstatus')}}").then(response=>{
+           data=response.data
+           console.log(data[0].message_id)
+           if (data.length != 0){
+            document.getElementById('red-dot').classList.remove('hide')
+            document.getElementById('red-dot-chatlist').classList.remove('hide')
+            data.forEach(item=>{
+                document.getElementById(`red-dot-${item.message_id}`).classList.remove('hide')
+            })
+           }
+        //    if(data){
+        //     if ( !document.getElementById('red-dot').classList.contains('hide')){
+        //         document.getElementById('red-dot').classList.add('hide')
+        //     }
+        //     if (!document.getElementById('red-dot-chatlist').classList.contains('hide')){
+        //         document.getElementById('red-dot-chatlist').classList.add('hide')
+        //     }
+           
+
+        //    }
+           data.forEach(item=>{
+            
+           })
+        })
+    })
+</script>
         
 </body>
 

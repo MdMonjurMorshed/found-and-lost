@@ -14,6 +14,7 @@ class MessageSent extends Model
     protected $fillable = [
         'sender_id',
         'receiver_id',
+        'read_status',
         'topic',
         'claim_id',
         'report_id'

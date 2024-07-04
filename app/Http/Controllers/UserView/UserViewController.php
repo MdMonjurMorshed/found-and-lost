@@ -515,5 +515,26 @@ class UserViewController extends Controller
 
         return ['founditems'=>$founditems,'lostitems'=>$lostitems,'returnitems'=>$returnitems];
     }
+
+    public function cat_all(){
+        $categories = Category::all();
+        return ['category'=>$categories];
+    }
+
+    public function update_read($message_id){
+        $message = MessageSent::find($message_id);
+        $read = json_decode($message->read_status,true);
+        if (Auth::id()==$read['user']){
+            $message->read_status = json_encode([
+                'user'=>$read['user'],
+                'read'=>true
+            ]);
+        }
+        $message->save();
+
+        return ['status'=>'updated successfully'];
+
+
+    }
     
 }

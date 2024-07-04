@@ -260,7 +260,13 @@
         </script>
 
 
+<script>
+  document.getElementById('message').addEventListener('change',(e)=>{
+    axios.put("{{route('user.put.readstatus',['message_id'=>$message->id])}}").then(response=>{
 
+    })
+  })
+</script>
             
           
           

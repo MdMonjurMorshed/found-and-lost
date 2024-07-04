@@ -61,6 +61,10 @@ Route::middleware('auth.guard:web')->prefix('user')->group(function(){
 
     // search-box search
     Route::get('search-box',[UserViewController::class,'box_search'])->name('user.get.search'); 
+    Route::get('get-all-cat',[UserViewController::class,'cat_all'])->name('user.get.cat');
+    Route::put('update-read-status/{message_id}',[UserViewController::class,'update_read'])->name('user.put.readstatus');
+
+    Route::get('message-status',[MessageSentController::class,'message_status'])->name('user.get.readstatus');
 
 
    

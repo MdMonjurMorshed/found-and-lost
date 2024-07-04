@@ -5,14 +5,14 @@
 </span>
                         <div id="subcategory-list" class="subcategory-list ms-4 hide">
                         @foreach($categories as $category)
-                            <form id="subcat-{{$category->id}}" action="" method="GET">
+                            <form id="subcat-{{$category->id}}" class="cat-holder" action="" method="GET">
                                     
 
                                     <button class="logout-btn" id="cat-search-{{$category->id}}" type="submit" >{{$category->name}} </button>
                                     @if(Auth::guard('admin')->check())
                                     
                                       
-                                            <i class="fa fa-trash" type="button" id="category-{{$category->id}}" aria-hidden="true" style="color:red"></i>
+                                            <i class="fa fa-trash " type="button"  id="category-{{$category->id}}" aria-hidden="true" style="color:red;display:flex;justify-content:center;align-items:center;padding:5%" ></i>
                                             
                                             <script>
                                 document.getElementById('category-{{$category->id}}').addEventListener('click',(e)=>{
@@ -310,10 +310,10 @@
 
     <form action="{{route('admin.create.category')}}" method="POST">
         @csrf
-        <div class="container">
+        <div class="cat-add-container">
             <div class="row d-flex justify-content-spacearound">
                 <div class="col-sm-1 add-cat-but-holder">
-                    <button class="add-cat-but" type="submit"  >add category</button>
+                    <button class="add-cat-but" type="submit"  >Add category</button>
                 </div>
                 <div class="col-sm-9 category-input-holder">
                     <input type="text" class="category-add" name="category" placeholder="add cat.." >

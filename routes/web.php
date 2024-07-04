@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\MessageSentEvent;
+use App\Events\MessageNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,11 +32,30 @@ Route::post('/send-message', function (Request $request) {
     }
     $existing_data[]=$data;
     $message->messages = json_encode($existing_data);
+    if($request->user_id==$message->sender_id){
+        $message->read_status = json_encode([
+           "user" => $message->receiver_id,
+           "read" => false
+        ]);
+    }else{
+        $message->read_status = json_encode([
+            "user" => $message->sender_id,
+            "read" => false
+         ]);
+    }
+
     $message->save();
 
     
-
+   
     broadcast(new MessageSentEvent($request->user_id,$request->message,$request->message_id))->toOthers();
+    if(Auth::user()->id == $message->sender_id ){
+        broadcast(new MessageNotification($message->receiver_id,$message->sender_id,$request->message,$message->id))->toOthers();
+    }else{
+        broadcast(new MessageNotification($message->sender_id,$message->receiver_id,$request->message,$message->id))->toOthers();
+    }
+    
+    
    
     return ['status' => 'Message Sent!','message_id'=>$request->message_id,'message'=>$request->message];
 });

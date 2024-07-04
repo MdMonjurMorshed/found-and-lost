@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
+            $table->json('read_status')->nullable();
             $table->json('topic');
             $table->unsignedBigInteger('claim_id')->nullable();
             $table->unsignedBigInteger('report_id')->nullable();

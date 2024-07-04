@@ -18,4 +18,8 @@ Broadcast::channel('chat.{message_id}', function ($user,$message_id) {
     return Auth::guard('web')->check() ;
 });
 
+Broadcast::channel('message-notify.{user}',function ($user){
+     return Auth::guard('web')->check();
+});
+
 
