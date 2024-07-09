@@ -29,7 +29,7 @@ class AdminViewController extends Controller
         if (Auth::guard('admin')->check() )
         {
             $categories = Category::all();
-            $founditems = FoundItems::all();
+            $founditems = FoundItems::where('return',false)->get();
             return view('admin.layout.found',['categories'=>$categories,'founditems'=>$founditems]);
         }
         return redirect(route('user.login'));
@@ -40,7 +40,7 @@ class AdminViewController extends Controller
         if (Auth::guard('admin')->check() )
         {
             $categories = Category::all();
-            $lostitems = LostItems::all();
+            $lostitems = LostItems::where('return',false)->get();
             return view('admin.layout.lost',['categories'=>$categories,'lostitems'=>$lostitems]);
         }
         return redirect(route('user.login'));
@@ -237,20 +237,28 @@ class AdminViewController extends Controller
 
     public function box_search(Request $request){
         $value = $request->input('search');
-        $founditems = FoundItems::all();
-        $lostitems = LostItems::all();
+        $founditems = FoundItems::where('return',false)->get();
+        $lostitems = LostItems::where('return',false)->get();
         $returnitems = ReturnItems::all();
         if ($value){
-            $founditems = FoundItems::where('title','Like',"%{$value}%")
-        ->orWhere('location','Like',"%{$value}%")
-        ->orWhere('found_date','Like',"%{$value}%")
-        ->orWhere('category','Like',"%{$value}%")
-        ->get();
+            $founditems = FoundItems::where('return', false)
+            ->where(function ($query) use ($value) {
+                $query->where('title', 'Like', "%{$value}%")
+                    ->orWhere('location', 'Like', "%{$value}%")
+                    ->orWhere('found_date', 'Like', "%{$value}%")
+                    ->orWhere('category', 'Like', "%{$value}%");
+            })
+            ->get();
 
-        $lostitems = LostItems::where('title','Like',"%{$value}%")
+        $lostitems = LostItems::where('return', false)
+        ->where(function ($query) use ($value){
+
+        $query-> where('title','Like',"%{$value}%")
         ->orWhere('location','Like',"%{$value}%")
         ->orWhere('found_date','Like',"%{$value}%")
-        ->orWhere('category','Like',"%{$value}%")
+        ->orWhere('category','Like',"%{$value}%");
+        })
+       
         ->get();
 
         $returnitems = ReturnItems::where('title','Like',"%{$value}%")
@@ -266,8 +274,8 @@ class AdminViewController extends Controller
     }
 
     public function cat_search($cat_name){
-        $founditems = FoundItems::where('category',$cat_name)->get(); 
-        $lostitems = LostItems::where('category',$cat_name)->get();
+        $founditems = FoundItems::where('category',$cat_name)->where('return',false)->get(); 
+        $lostitems = LostItems::where('category',$cat_name)->where('return',false)->get();
         $returnitems = ReturnItems::where('category',$cat_name)->get();
 
         return ['founditems'=>$founditems,'lostitems'=>$lostitems,'returnitems'=>$returnitems];

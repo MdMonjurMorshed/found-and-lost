@@ -58,6 +58,12 @@
                     <input type="password" name="confirm_password" class="input-feild" id="confirmed-password"
                         aria-describedby="passswordHelp">
                 </div>
+                <div>
+                    <ul>
+                        <li>Password should be at least 8 characters including 1 capital letter, 1 small letter, 1 number and 1 special character</li>
+                    </ul>
+                    
+                </div>
                 <div style="display: flex; justify-content: center; align-items: center; margin-top: 40px;">
                     
                     <button class="login-btn" type="submit">Register</button>

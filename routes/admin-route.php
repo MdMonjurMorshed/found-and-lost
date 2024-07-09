@@ -19,8 +19,8 @@ Route::prefix('admin')->group(function(){
         if (Auth::guard('admin')->check())
         {
             $categories = Category::all();
-            $founditems = FoundItems::all();
-            $lostitems = LostItems::all();
+            $founditems = FoundItems::where('return',false)->get();
+            $lostitems = LostItems::where('return',false)->get();
             return view('admin.layout.dashboard',['categories'=>$categories,'founditems'=>$founditems,'lostitems'=>$lostitems]);
         }
         return redirect(route('user.login'));
