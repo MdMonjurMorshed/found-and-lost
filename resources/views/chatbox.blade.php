@@ -67,13 +67,30 @@
       
 
     </div>
+    @if($claim)
+      <a href="{{route('user.found.details',['id'=>$topic['item_id']])}}">
+        <div class="message-topic">
+          <img class="topic-image" src="{{asset($topic['image'])}}" height="50px" width="50px" alt="">
+          <h4 class="d-flex justify-content-center" style="display:flex;justify-content:center;align-items:center ;padding-left:10px">{{$topic['title']}}</h4>
 
+        </div>
 
-    <div class="message-topic">
-      <img class="topic-image" src="{{asset($topic['image'])}}" height="50px" width="50px" alt="">
-      <h4 class="d-flex justify-content-center" style="display:flex;justify-content:center;align-items:center ;padding-left:10px">{{$topic['title']}}</h4>
+      </a>
 
-    </div>
+    @endif
+
+    @if($report)
+    <a href="{{route('user.lost.details',['id'=>$topic['item_id']])}}">
+      <div class="message-topic">
+        <img class="topic-image" src="{{asset($topic['image'])}}" height="50px" width="50px" alt="">
+        <h4 class="d-flex justify-content-center" style="display:flex;justify-content:center;align-items:center ;padding-left:10px">{{$topic['title']}}</h4>
+
+      </div>
+
+    </a>
+    @endif
+    
+    
 
     <div class="db-message" id="message-box">
     @if ($messages)

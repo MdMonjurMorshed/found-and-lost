@@ -336,6 +336,7 @@ class UserViewController extends Controller
                           'topic' => json_encode([
                             'title'=>$founditem->title,
                             'image'=>$founditem->image,
+                            'item_id'=>$founditem->id,
                           ]),   
                           'claim_id' => $claim->id
             ]);
@@ -425,6 +426,7 @@ class UserViewController extends Controller
                                  'topic' => json_encode([
                                     'title'=>$lostitem->title,
                                     'image'=>$lostitem->image,
+                                    'item_id'=>$lostitem->id,
                                   ]),        
                                  'report_id' => $report->id
                    ]);
